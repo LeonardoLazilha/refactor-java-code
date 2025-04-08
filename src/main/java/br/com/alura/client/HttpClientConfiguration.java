@@ -1,5 +1,7 @@
 package br.com.alura.client;
 
+import br.com.alura.domain.Abrigo;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
@@ -18,11 +20,11 @@ public class HttpClientConfiguration {
         return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    public HttpResponse<String> dispararPost(HttpClient client, String uri, JsonObject json) throws IOException, InterruptedException {
+    public HttpResponse<String> dispararPost(HttpClient client, String uri, Object object) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(uri))
                 .header("Content-Type", "application/json")
-                .method("POST", HttpRequest.BodyPublishers.ofString(json.toString()))
+                .method("POST", HttpRequest.BodyPublishers.ofString(new Gson().toJson(object)))
                 .build();
 
         return client.send(request, HttpResponse.BodyHandlers.ofString());

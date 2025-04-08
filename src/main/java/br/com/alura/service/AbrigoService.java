@@ -1,6 +1,7 @@
 package br.com.alura.service;
 
 import br.com.alura.client.HttpClientConfiguration;
+import br.com.alura.domain.Abrigo;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -40,14 +41,11 @@ public class AbrigoService {
         System.out.println("Digite o email do abrigo:");
         String email = new Scanner(System.in).nextLine();
 
-        JsonObject json = new JsonObject();
-        json.addProperty("nome", nome);
-        json.addProperty("telefone", telefone);
-        json.addProperty("email", email);
+        Abrigo abrigo = new Abrigo(nome, telefone, email);
 
         HttpClient client = HttpClient.newHttpClient();
         String uri = "http://localhost:8080/abrigos";
-        HttpResponse<String> response = clientConfiguration.dispararPost(client, uri, json);
+        HttpResponse<String> response = clientConfiguration.dispararPos t(client, uri, abrigo);
         int statusCode = response.statusCode();
         String responseBody = response.body();
         if (statusCode == 200) {
