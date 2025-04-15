@@ -19,6 +19,8 @@ public class Pet {
         this.peso = peso;
     }
 
+    public Pet(){}
+
     public Long getId() {
         return id;
     }

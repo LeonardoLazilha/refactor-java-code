@@ -2,6 +2,7 @@ package br.com.alura.service;
 
 import br.com.alura.client.HttpClientConfiguration;
 import br.com.alura.domain.Abrigo;
+import br.com.alura.domain.Pet;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -43,9 +44,8 @@ public class AbrigoService {
         String telefone = new Scanner(System.in).nextLine();
         System.out.println("Digite o email do abrigo:");
         String email = new Scanner(System.in).nextLine();
-
-        Abrigo abrigo = new Abrigo(nome, telefone, email);
-
+        Pet[] pets = new Pet[0];
+        Abrigo abrigo = new Abrigo(nome, telefone, email, pets);
         HttpClient client = HttpClient.newHttpClient();
         String uri = "http://localhost:8080/abrigos";
         HttpResponse<String> response = clientConfiguration.dispararPost(client, uri, abrigo);
