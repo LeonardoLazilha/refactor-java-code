@@ -4,15 +4,9 @@ import br.com.alura.client.HttpClientConfiguration;
 import br.com.alura.domain.Abrigo;
 import br.com.alura.domain.Pet;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Arrays;
 import java.util.List;
@@ -22,10 +16,13 @@ public class AbrigoService {
 
     HttpClientConfiguration clientConfiguration = new HttpClientConfiguration();
 
+    public AbrigoService() {
+    }
+
     public void listarAbrigos() throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         String uri = "http://localhost:8080/abrigos";
-        HttpResponse<String> response = clientConfiguration.dispararGet(client, uri);
+        HttpResponse<String> response = clientConfiguration.dispararRequisicaoGet(uri);
         String responseBody = response.body();
         Abrigo[] abrigos = new ObjectMapper().readValue(responseBody, Abrigo[].class);
         List<Abrigo> abrigoList = Arrays.stream(abrigos).toList();
@@ -59,6 +56,5 @@ public class AbrigoService {
             System.out.println(responseBody);
         }
     }
-
-
+    
 }
