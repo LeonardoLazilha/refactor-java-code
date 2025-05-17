@@ -1,8 +1,6 @@
 package br.com.alura.client;
 
-import br.com.alura.domain.Abrigo;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.net.URI;
@@ -12,11 +10,14 @@ import java.net.http.HttpResponse;
 
 public class HttpClientConfiguration {
 
-    public HttpResponse<String> dispararGet(HttpClient client, String uri) throws IOException, InterruptedException {
+    public HttpResponse<String> dispararRequisicaoGet(String uri) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(uri))
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
+
         return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
@@ -29,4 +30,6 @@ public class HttpClientConfiguration {
 
         return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
+
+
 }
